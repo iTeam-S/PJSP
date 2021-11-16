@@ -11,9 +11,7 @@ webserver = Flask(__name__)
 def receive_message():
     if request.method == "GET":
         '''
-            Ce cas est destiné au verification de l'etat de
-            vie du serveur web, utilise par Facebook pour
-            justifier que ce serveur reçoit les messages envoyés.
+            C'est seuelement dans le cas ou facebook va vérifier l'état du serveur Webhook.
         '''
         token_sent = request.args.get("hub.verify_token")
         if token_sent == VERIFY_TOKEN:
@@ -41,11 +39,11 @@ def receive_message():
             '''
             traitement._analyse(body)
     return "receive", 200
-@webserver.route("/icons/<filename>", methods=["GET", "POST"])
+@webserver.route("/assets/<filename>", methods=["GET"])
 def get_file(filename):
     try:
         return send_from_directory(
-                    './icons/',
+                    './assets/',
                     path=filename,
                     as_attachment=True
                 )
