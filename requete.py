@@ -49,3 +49,4 @@ class Requete:
 
     def _close(self):
         self.db.close()
+    
