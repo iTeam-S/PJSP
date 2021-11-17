@@ -69,22 +69,22 @@ class Messenger:
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Pharmacies",
-                    "payload": "_PHARMACIES",
-                    "image_url": f"{BASE_URL}/icons/pharmacy.png"
+                    "title": "Soldes",
+                    "payload": "_SOLDE",
+                    "image_url": f"{BASE_URL}/icons/solde.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Médecin",
-                    "payload": "_MEDECIN",
-                    "image_url":f"{BASE_URL}/icons/medecin.png"
+                    "title": "Pensions",
+                    "payload": "_PENSION",
+                    "image_url":f"{BASE_URL}/icons/pension.png"
                 },
 
                 {
                     "content_type": "text",
-                    "title": "Tomady",
-                    "payload": "_MOI",
-                    "image_url": f"{BASE_URL}/icons/innovation.png"
+                    "title": "PJSP",
+                    "payload": "_APP",
+                    "image_url": f"{BASE_URL}/icons/pjsp.png"
                 }
             ] 
         else:

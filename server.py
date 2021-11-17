@@ -39,6 +39,7 @@ def receive_message():
             '''
             traitement._analyse(body)
     return "receive", 200
+    
 @webserver.route("/assets/<filename>", methods=["GET"])
 def get_file(filename):
     try:

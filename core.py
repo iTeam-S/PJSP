@@ -14,9 +14,9 @@ class Traitement:
         '''
             Fonction privée qui traite les differentes commandes réçu
         '''
+        
         bot.send_action(user_id,'mark_seen')
-
-
+        print(commande)
     
     def _analyse(self, data):
         '''
@@ -53,7 +53,6 @@ class Traitement:
                             sender_id,
                             message['message']['quick_reply'].get('payload')
                         )
-
                     elif message['message'].get('text'):
                         # cas d'une reponse par text simple.
                         self.__execution(
