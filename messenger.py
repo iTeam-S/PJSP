@@ -94,6 +94,8 @@ class Messenger:
                     "image_url": f"{BASE_URL}/icons/pjsp.png"
                 },
             ] 
+        elif kwargs.get('NEXT'):
+            
         else:
             return
         data_json = {

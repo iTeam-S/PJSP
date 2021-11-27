@@ -1,3 +1,4 @@
+from requests.api import request
 import requete
 import messenger
 from conf import ACCESS_TOKEN ,BASE_URL
@@ -16,9 +17,14 @@ class Traitement:
         '''
         
         bot.send_action(user_id,'mark_seen')
+        
+
+        if commande == '_SOLDE' :
+            data = req.getListeMenu(1)
+            bot.send_result(user_id, data["data"])
+
+            
         status = req.getStatus(user_id)
-
-
         bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
     
     def _analyse(self, data):
