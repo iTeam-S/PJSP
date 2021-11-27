@@ -16,7 +16,10 @@ class Traitement:
         '''
         
         bot.send_action(user_id,'mark_seen')
-        print(commande)
+        status = req.getStatus(user_id)
+
+
+        bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
     
     def _analyse(self, data):
         '''

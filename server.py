@@ -40,11 +40,11 @@ def receive_message():
             traitement._analyse(body)
     return "receive", 200
     
-@webserver.route("/assets/<filename>", methods=["GET"])
+@webserver.route("/icons/<filename>", methods=["GET"])
 def get_file(filename):
     try:
         return send_from_directory(
-                    './assets/',
+                    './icons/',
                     path=filename,
                     as_attachment=True
                 )
@@ -54,4 +54,4 @@ def get_file(filename):
 
 if __name__ == "__main__":
     # Lancement du serveur web
-    webserver.run(port=8071)
+    webserver.run(port=8071,debug=True)

@@ -65,7 +65,7 @@ class Messenger:
             Envoie des quick reply messenger
         '''
         if kwargs.get('MENU_PRINCIPALE'):
-            text = "Bienvenue sur le projet Tomady☺"
+            text = "Bienvenue sur PJSP"
             quick_rep = [
                 {
                     "content_type": "text",
@@ -82,15 +82,20 @@ class Messenger:
 
                 {
                     "content_type": "text",
+                    "title": "Recherche",
+                    "payload": "_SEARCH",
+                    "image_url": f"{BASE_URL}/icons/search.png"
+                },
+
+                {
+                    "content_type": "text",
                     "title": "PJSP",
                     "payload": "_APP",
                     "image_url": f"{BASE_URL}/icons/pjsp.png"
-                }
+                },
             ] 
         else:
             return
-
-
         data_json = {
             'messaging_type': "RESPONSE",
             'recipient': {
