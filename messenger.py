@@ -70,7 +70,7 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "Soldes",
-                    "payload": "_SOLDE",
+                    "payload": "_PAGE_SOLDE_0",
                     "image_url": f"{BASE_URL}/icons/solde.png"
                 },
                 {
@@ -94,8 +94,6 @@ class Messenger:
                     "image_url": f"{BASE_URL}/icons/pjsp.png"
                 },
             ] 
-        elif kwargs.get('NEXT'):
-            
         else:
             return
         data_json = {

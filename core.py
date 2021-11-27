@@ -19,11 +19,28 @@ class Traitement:
         bot.send_action(user_id,'mark_seen')
         
 
-        if commande == '_SOLDE' :
-            data = req.getListeMenu(1)
-            bot.send_result(user_id, data["data"])
+        if commande.startswith('_PAGE_SOLDE_') :
+            lastID = int(commande.replace('_PAGE_SOLDE_',''))
+            data = req.getListeMenu(1,lastID)
+            if data["next"] == True :
+                lastID = data["lastID"]
+                next = [
+                        {
+                            "content_type": "text",
+                            "title":"Next",
+                            "payload": f"_PAGE_SOLDE_{lastID}",
+                            "image_url":
+                                "https://icon-icons.com/downloadimage.php"
+                                + "?id=81300&root=1149/PNG/512/&file=" +
+                                "1486504364-chapter-controls-forward-play"
+                                + "-music-player-video-player-next_81300.png"
+                        }
+                    ]
+                bot.send_result(user_id, data["data"],next= next)
+            else :
+                bot.send_result(user_id, data["data"])
 
-            
+            return 
         status = req.getStatus(user_id)
         bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
     

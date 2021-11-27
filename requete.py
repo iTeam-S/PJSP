@@ -110,7 +110,7 @@ class Requete:
                         ]
                     })
             lastID = res[0]                  
-        response["lasID"] = lastID
+        response["lasID"] = int(lastID)
 
         len = int(self.getLastTypeDocument(type))
         if lastID < len : next = True 
@@ -121,5 +121,5 @@ class Requete:
     def _close(self):
         self.db.close()
 
-# req = Requete()
-# print(req.getListeMenu(1,0))
+req = Requete()
+print(req.getListeMenu(1,13))
