@@ -73,11 +73,11 @@ class Requete:
         self.__verif()
         
         if type == 1:
-            subtitle = "Pension"
-            image = f"{BASE_URL}/icons/pension_photo.jpg"
-        else :
             subtitle = "Solde"
             image = f"{BASE_URL}/icons/solde_photo.jpg"
+        else :
+            subtitle = "Pension"
+            image = f"{BASE_URL}/icons/pension_photo.jpg"
         req = '''
             SELECT n_nature , libelle_nature
             FROM nature
@@ -105,12 +105,12 @@ class Requete:
                             {
                                 "type": "postback",
                                 "title": "Plus d'info",
-                                "payload": f"_SHOW_INFO_{str(type)}_{res[0]}"
+                                "payload": f"_SHOW_INFO_{subtitle.upper()}_{res[0]}"
                             }
                         ]
                     })
             lastID = res[0]                  
-        response["lasID"] = int(lastID)
+        response["lastID"] = int(lastID)
 
         len = int(self.getLastTypeDocument(type))
         if lastID < len : next = True 
@@ -118,8 +118,23 @@ class Requete:
         response["next"]=next
         return response
 
+
+    def getReferenceNature(self,ID):
+        self.__verif()
+        req = """
+            SELECT n_article, text_article 
+            FROM article 
+            WHERE id_nature=%s
+        """
+        self.cursor.execute(req,(ID,))
+        data = self.cursor.fetchall()
+        res = "Réference :"
+        for a in data :
+            res = res + f"\n -{a[1]} "
+        
+        return res
     def _close(self):
         self.db.close()
 
 req = Requete()
-print(req.getListeMenu(1,13))
+print(req.getReferenceNature(1))

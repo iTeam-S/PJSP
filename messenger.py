@@ -76,7 +76,7 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "Pensions",
-                    "payload": "_PENSION",
+                    "payload": "_PAGE_PENSION_0",
                     "image_url":f"{BASE_URL}/icons/pension.png"
                 },
 
@@ -90,10 +90,57 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "PJSP",
-                    "payload": "_APP",
+                    "payload": "MENU_PJSP",
                     "image_url": f"{BASE_URL}/icons/pjsp.png"
                 },
             ] 
+        elif kwargs.get('MENU_SOLDE'):
+            text = "Veuillez choisir"
+            ID = kwargs.get('ID')
+            quick_rep = [
+                {
+                    "content_type": "text",
+                    "title": "Réference",
+                    "payload": f"_SOLDE_REF_{ID}",
+                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Visa",
+                    "payload": f"_SOLDE_VISA_{ID}",
+                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Mandatement",
+                    "payload": f"_SOLDE_MDT_{ID}",
+                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                },
+            ]
+        elif kwargs.get('MENU_PJSP'):
+            text = "Veuillez choisir"
+            ID = kwargs.get('ID')
+            quick_rep = [
+                {
+                    "content_type": "text",
+                    "title": "Contact",
+                    "payload": f"_PAGE_CONTACT_O",
+                    "image_url": f"{BASE_URL}/icons/contact.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Doléance",
+                    "payload": f"_DOLEANCE",
+                    "image_url": f"{BASE_URL}/icons/doleance.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Télecharger",
+                    "payload": f"_SOLDE_MDT_{ID}",
+                    "image_url": f"{BASE_URL}/icons/download.png"
+                },
+            ]
+
         else:
             return
         data_json = {
