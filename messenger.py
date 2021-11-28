@@ -124,7 +124,7 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "Contact",
-                    "payload": f"_PAGE_CONTACT_O",
+                    "payload": "_MENU_CONTACT",
                     "image_url": f"{BASE_URL}/icons/contact.png"
                 },
                 {
@@ -136,11 +136,32 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "Télecharger",
-                    "payload": f"_SOLDE_MDT_{ID}",
+                    "payload": f"_DOWNLOAD",
                     "image_url": f"{BASE_URL}/icons/download.png"
                 },
             ]
-
+        elif kwargs.get('MENU_CONTACT'):
+            text = "Veuillez choisir"
+            quick_rep = [
+                {
+                    "content_type": "text",
+                    "title": "Service regional",
+                    "payload": f"_PAGE_CONTACT_SERVICE_0",
+                    "image_url": f"{BASE_URL}/icons/contact.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Antenne",
+                    "payload": f"_PAGE_CONTACT_ANTENNE_0",
+                    "image_url": f"{BASE_URL}/icons/doleance.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Service centrale",
+                    "payload": f"_DOWNLOAD",
+                    "image_url": f"{BASE_URL}/icons/download.png"
+                },
+            ]
         else:
             return
         data_json = {

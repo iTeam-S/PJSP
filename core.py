@@ -65,6 +65,10 @@ class Traitement:
             bot.send_quick_reply(user_id,MENU_PJSP=True)
             return
 
+        elif commande == '_MENU_CONTACT':
+            bot.send_quick_reply(user_id,MENU_CONTACT=True)
+            return
+            
 
         elif commande.startswith('_SOLDE'):
             commande = commande.replace('_SOLDE','')
