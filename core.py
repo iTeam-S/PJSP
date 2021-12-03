@@ -37,6 +37,10 @@ class Traitement:
                 bot.send_result(user_id, data["data"])
             return
 
+        elif commande == '_MAIN' :
+            bot.send_quick_reply(user_id, MENU_PRINCIPALE=True)
+            return 
+
         elif commande.startswith('_PAGE_PENSION_') :
             lastID = int(commande.replace('_PAGE_PENSION_',''))
             data = req.getListeMenu(2,lastID)
@@ -57,16 +61,16 @@ class Traitement:
 
         elif commande.startswith('_SHOW_INFO_SOLDE_'):
             ID = commande.replace('_SHOW_INFO_SOLDE_','')
-            bot.send_quick_reply(user_id,MENU_SOLDE=True,ID=ID)
+            bot.send_quick_reply(user_id,MENU_SOLDE=True,ID=ID,PRINCIPALE=True)
             return
 
 
         elif commande == 'MENU_PJSP':
-            bot.send_quick_reply(user_id,MENU_PJSP=True)
+            bot.send_quick_reply(user_id,MENU_PJSP=True,PRINCIPALE=True)
             return
 
         elif commande == '_MENU_CONTACT':
-            bot.send_quick_reply(user_id,MENU_CONTACT=True)
+            bot.send_quick_reply(user_id,MENU_CONTACT=True,PRINCIPALE=True)
             return
             
 

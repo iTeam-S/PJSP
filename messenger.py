@@ -164,6 +164,14 @@ class Messenger:
             ]
         else:
             return
+
+        if kwargs.get('PRINCIPALE') :
+                quick_rep.append({
+                    "content_type": "text",
+                    "title": "Menu Principale",
+                    "payload": f"_MAIN",
+                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                })
         data_json = {
             'messaging_type': "RESPONSE",
             'recipient': {
