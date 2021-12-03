@@ -64,6 +64,10 @@ class Traitement:
             bot.send_quick_reply(user_id,MENU_SOLDE=True,ID=ID,PRINCIPALE=True)
             return
 
+        elif commande.startswith('_SHOW_INFO_PENSION_'):
+            ID = commande.replace('_SHOW_INFO_PENSION_','')
+            bot.send_quick_reply(user_id,MENU_PENSION=True,ID=ID,PRINCIPALE=True)
+            return
 
         elif commande == 'MENU_PJSP':
             bot.send_quick_reply(user_id,MENU_PJSP=True,PRINCIPALE=True)
@@ -71,6 +75,11 @@ class Traitement:
 
         elif commande == '_MENU_CONTACT':
             bot.send_quick_reply(user_id,MENU_CONTACT=True,PRINCIPALE=True)
+            return
+        
+        elif commande == '_DOWNLOAD' :
+            bot.send_message(user_id, "Attendez un peu , on est en train de le télecharger.")
+            bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.png")
             return
             
 
@@ -82,6 +91,34 @@ class Traitement:
                 detail = req.getReferenceNature(ID)
                 bot.send_message(user_id,detail)
                 return
+
+            elif commande.startswith('_VISA_'):
+                commande = commande.replace('_VISA_','')
+                ID = int(commande)
+                bot.send_message(user_id,f"Details Visa du Solde N°{ID}")
+                return
+
+            elif commande.startswith('_MDT_'):
+                commande = commande.replace('_MDT_','')
+                ID = int(commande)
+                bot.send_message(user_id,f"Details Mandatement du Solde N°{ID}")
+                return
+
+        elif commande.startswith('_PENSION'):
+            commande = commande.replace('_PENSION','')
+            if commande.startswith('_REF_'):
+                commande = commande.replace('_REF_','')
+                ID = int(commande)
+                detail = req.getReferenceNature(ID)
+                bot.send_message(user_id,detail)
+                return
+                
+            elif commande.startswith('_LQD_'):
+                commande = commande.replace('_LQD_','')
+                ID = int(commande)
+                bot.send_message(user_id,f"Details Liquidation de la Pension N°{ID}")
+                return
+
 
 
         status = req.getStatus(user_id)

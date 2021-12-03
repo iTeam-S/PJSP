@@ -91,34 +91,53 @@ class Messenger:
                     "content_type": "text",
                     "title": "PJSP",
                     "payload": "MENU_PJSP",
-                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                    "image_url": f"{BASE_URL}/icons/pjsp.webp"
                 },
             ] 
         elif kwargs.get('MENU_SOLDE'):
-            text = "Veuillez choisir"
+            text = "Veuillez choisir :"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
                     "content_type": "text",
                     "title": "Réference",
                     "payload": f"_SOLDE_REF_{ID}",
-                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                    "image_url": f"{BASE_URL}/icons/ref.png"
                 },
                 {
                     "content_type": "text",
                     "title": "Visa",
                     "payload": f"_SOLDE_VISA_{ID}",
-                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                    "image_url": f"{BASE_URL}/icons/visa.png"
                 },
                 {
                     "content_type": "text",
                     "title": "Mandatement",
                     "payload": f"_SOLDE_MDT_{ID}",
-                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                    "image_url": f"{BASE_URL}/icons/mdt.png"
                 },
             ]
+
+        elif kwargs.get('MENU_PENSION'):
+            text = "Veuillez choisir :"
+            ID = kwargs.get('ID')
+            quick_rep = [
+                {
+                    "content_type": "text",
+                    "title": "Réference",
+                    "payload": f"_PENSION_REF_{ID}",
+                    "image_url": f"{BASE_URL}/icons/ref.png"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Liquidation",
+                    "payload": f"_PENSION_LQD_{ID}",
+                    "image_url": f"{BASE_URL}/icons/lqd.png"
+                },
+            ]
+
         elif kwargs.get('MENU_PJSP'):
-            text = "Veuillez choisir"
+            text = "Veuillez choisir :"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
@@ -141,7 +160,7 @@ class Messenger:
                 },
             ]
         elif kwargs.get('MENU_CONTACT'):
-            text = "Veuillez choisir"
+            text = "Veuillez choisir :"
             quick_rep = [
                 {
                     "content_type": "text",
@@ -170,7 +189,7 @@ class Messenger:
                     "content_type": "text",
                     "title": "Menu Principale",
                     "payload": f"_MAIN",
-                    "image_url": f"{BASE_URL}/icons/pjsp.png"
+                    "image_url": f"{BASE_URL}/icons/main.png"
                 })
         data_json = {
             'messaging_type': "RESPONSE",
