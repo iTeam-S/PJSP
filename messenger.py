@@ -80,12 +80,12 @@ class Messenger:
                     "image_url":f"{BASE_URL}/icons/pension.png"
                 },
 
-                {
-                    "content_type": "text",
-                    "title": "Recherche",
-                    "payload": "_SEARCH",
-                    "image_url": f"{BASE_URL}/icons/search.png"
-                },
+                # {
+                #     "content_type": "text",
+                #     "title": "Recherche",
+                #     "payload": "_SEARCH",
+                #     "image_url": f"{BASE_URL}/icons/search.png"
+                # },
 
                 {
                     "content_type": "text",

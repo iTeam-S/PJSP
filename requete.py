@@ -92,8 +92,11 @@ class Requete:
         response = {}
         response["data"] = []
         for res in resultat :
+            title = str(res[1]).replace('\n','')
+            title = str(title).replace('\r','')
+            title = str(title).replace('\t','')
             response["data"].append({
-                        'title': str(res[1]).replace('\n',''),
+                        'title': title,
                         'subtitle': subtitle,
                         'image_url': image,
                         "default_action": {
@@ -131,10 +134,51 @@ class Requete:
         res = "Réference :"
         for a in data :
             res = res + f"\n -{a[1]} "
-        
+        return res
+
+    def getDetailNature(self,ID,type=1):
+        """
+            Type =
+                1 -> Visa
+                2 -> Mandatement
+        """
+        self.__verif()
+        req = """
+            SELECT T.titre , S.sous_titre , P.piece 
+            FROM piece P 
+            LEFT JOIN sous_titre S ON P.n_soustitre = S.n_soustitre
+            LEFT JOIN titre T ON T.n_titre = S.n_titre
+            LEFT JOIN nature N ON N.n_nature = T.n_nature
+            LEFT JOIN typepiece TP ON TP.n_typepiece = T.n_typepiece
+            WHERE N.n_nature = %s 
+            AND TP.n_typepiece = %s
+            ORDER BY S.sous_titre
+        """
+        self.cursor.execute(req,(ID,type))
+        output= self.cursor.fetchall()   
+        res = ""
+
+        current_titre = ""
+        current_sous_titre = ""
+
+        for data in output :
+            if data[0]!='vide':
+                if data[0] != current_titre :
+                    current_titre = data[0]
+                    res += f"   {data[0]}\n"  
+            if data[1]!='vide' :
+                if data[1] != current_sous_titre :
+                    current_sous_titre = data[1]
+                    res += f"   {data[1]} :\n" 
+            piece = str(data[2]).replace("\n","")
+            piece = str(piece).replace("\t","")
+            piece = str(piece).replace("\r","")
+            res += f"-{piece}\n"                         
+        if res == "" :
+            return "Il n'y a pas assez information."
         return res
     def _close(self):
         self.db.close()
 
-req = Requete()
-print(req.getReferenceNature(1))
+# req = Requete()
+# print(req.getDetailNature(6,2))

@@ -95,13 +95,15 @@ class Traitement:
             elif commande.startswith('_VISA_'):
                 commande = commande.replace('_VISA_','')
                 ID = int(commande)
-                bot.send_message(user_id,f"Details Visa du Solde N°{ID}")
+                detail = req.getDetailNature(ID,1)
+                bot.send_message(user_id,detail)
                 return
 
             elif commande.startswith('_MDT_'):
                 commande = commande.replace('_MDT_','')
                 ID = int(commande)
-                bot.send_message(user_id,f"Details Mandatement du Solde N°{ID}")
+                detail = req.getDetailNature(ID,2)
+                bot.send_message(user_id,detail)
                 return
 
         elif commande.startswith('_PENSION'):
@@ -116,7 +118,8 @@ class Traitement:
             elif commande.startswith('_LQD_'):
                 commande = commande.replace('_LQD_','')
                 ID = int(commande)
-                bot.send_message(user_id,f"Details Liquidation de la Pension N°{ID}")
+                detail = req.getDetailNature(ID,1)
+                bot.send_message(user_id,detail)
                 return
 
 
