@@ -63,7 +63,12 @@ class Messenger:
     def send_quick_reply(self, dest_id, **kwargs):
         '''
             Envoie des quick reply messenger
-        '''
+        '''                # {
+                #     "content_type": "text",
+                #     "title": "Recherche",
+                #     "payload": "_SEARCH",
+                #     "image_url": f"{BASE_URL}/icons/search.png"
+                # },
         if kwargs.get('MENU_PRINCIPALE'):
             text = "Bienvenue sur PJSP"
             quick_rep = [
