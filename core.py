@@ -79,7 +79,7 @@ class Traitement:
         
         elif commande == '_DOWNLOAD' :
             bot.send_message(user_id, "Attendez un peu , on est en train de le télecharger.")
-            bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.png")
+            bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.apk")
             return
             
 
