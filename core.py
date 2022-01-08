@@ -81,6 +81,9 @@ class Traitement:
             bot.send_message(user_id, "Attendez un peu , on est en train de le télecharger.")
             bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.apk")
             return
+        elif commande == 'GET_STARTED':
+            bot.persistent_menu(user_id)
+            return
 
         elif commande == '_SEARCH' or  commande == '_SEARCH_OUI':
             bot.send_message(user_id, "Veuillez saisir votre mot clé (>3 caractères).")

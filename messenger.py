@@ -325,22 +325,22 @@ class Messenger:
         dataJSON = {
             "psid": destId,
             "persistent_menu": [
-                    {
-                        "locale": "default",
-                        "composer_input_disabled": False,
-                        "call_to_actions": [
-                            {
-                                "type": "postback",
-                                "title": "Menu principal",
-                                "payload": "_MENU_PRINCIPAL"
-                            },
-                        ]
-                    }
-                ]
+                {
+                    "locale": "default",
+                    "composer_input_disabled": 'false',
+                    "call_to_actions": [
+                        {
+                            "type": "postback",
+                            "title": "Menu principal",
+                            "payload": "_MENU_PRINCIPAL"
+                        },
+                    ]
+                }
+            ]
         }
 
         res = requests.post(
-            self.url + '/custom_user_settings',
+            'https://graph.facebook.com/v12.0/me/custom_user_settings',
             json=dataJSON, headers=header, params=params
         )
         return res
