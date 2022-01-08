@@ -88,7 +88,7 @@ class Traitement:
             return  
         elif commande== '_SEARCH_NON':
             req.setStatus(user_id,"")
-            return       
+            return          
 
         elif commande.startswith('_SOLDE'):
             commande = commande.replace('_SOLDE','')
@@ -134,12 +134,12 @@ class Traitement:
                 req.setStatus(user_id,"")
                 return
             else :
-                bot.send_message(user_id,"Voici les resultats.")
                 data = req.searchListMenu(commande)
                 if len(data["data"]) == 0:
                     bot.send_message(user_id,"Il n'y malheureusement pas de resultats.")
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 else :
+                    bot.send_message(user_id,"Voici les resultats.")
                     bot.send_result(user_id, data["data"])
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 req.setStatus(user_id,"")

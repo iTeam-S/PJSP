@@ -1,3 +1,3 @@
-from requete import Requete 
+# from requete import Requete 
 
-req =  Requete()
+# req =  Requete()

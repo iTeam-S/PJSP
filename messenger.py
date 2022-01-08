@@ -141,7 +141,7 @@ class Messenger:
                 },
             ]
         elif kwargs.get('MENU_SEARCH'):
-            text = "Le texte doit dépasser au moins 3 caractères. Voulez vous réessayez."
+            text = "Voulez vous ressayez."
             ID = kwargs.get('ID')
             quick_rep = [
                 {
@@ -331,7 +331,7 @@ class Messenger:
                         "call_to_actions": [
                             {
                                 "type": "postback",
-                                "title": "Menu principale",
+                                "title": "Menu principal",
                                 "payload": "_MENU_PRINCIPAL"
                             },
                         ]
