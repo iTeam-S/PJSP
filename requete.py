@@ -143,10 +143,10 @@ class Requete:
         for res in resultat :
             if res[2] == 1:
                 subtitle = "Solde"
-                image = f"{BASE_URL}/icons/solde_photo.jpg"
+                image = f"{BASE_URL}/icons/solde_photo.png"
             else :
                 subtitle = "Pension"
-                image = f"{BASE_URL}/icons/pension_photo.jpg"
+                image = f"{BASE_URL}/icons/pension_photo.jpeg"
             title = str(res[1]).replace('\n','')
             title = str(title).replace('\r','')
             title = str(title).replace('\t','')

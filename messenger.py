@@ -124,7 +124,7 @@ class Messenger:
             ]
 
         elif kwargs.get('MENU_PENSION'):
-            text = "Veuillez choisir :"
+            text = "Veuillez-choisir :"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
@@ -141,7 +141,7 @@ class Messenger:
                 },
             ]
         elif kwargs.get('MENU_SEARCH'):
-            text = "Voulez vous ressayez."
+            text = "Voulez-vous ressayez?"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
@@ -331,7 +331,7 @@ class Messenger:
                     "call_to_actions": [
                         {
                             "type": "postback",
-                            "title": "Menu principal",
+                            "title": "🏠Menu principal",
                             "payload": "_MENU_PRINCIPAL"
                         },
                     ]

@@ -13,7 +13,7 @@ class Traitement:
 
     def __execution(self, user_id, commande):
         '''
-            Fonction privée qui traite les differentes commandes réçu
+            Fonction privée qui traite les differentes messages réçu dans la page.
         '''
         bot.persistent_menu(user_id)
         bot.send_action(user_id,'mark_seen')
@@ -78,15 +78,16 @@ class Traitement:
             return
         
         elif commande == '_DOWNLOAD' :
-            bot.send_message(user_id, "Attendez un peu , on est en train de le télecharger.")
+            bot.send_message(user_id, "😊Attendez un peu , on est en train de le télecharger.")
             bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.apk")
             return
         elif commande == 'GET_STARTED':
             bot.persistent_menu(user_id)
+            bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
             return
 
         elif commande == '_SEARCH' or  commande == '_SEARCH_OUI':
-            bot.send_message(user_id, "Veuillez saisir votre mot clé (>3 caractères).")
+            bot.send_message(user_id, "Veuillez-saisir votre mot clé(>3 caractères)")
             req.setStatus(user_id,"_attente_query")
             return  
         elif commande== '_SEARCH_NON':
@@ -139,10 +140,10 @@ class Traitement:
             else :
                 data = req.searchListMenu(commande)
                 if len(data["data"]) == 0:
-                    bot.send_message(user_id,"Il n'y malheureusement pas de resultats.")
+                    bot.send_message(user_id,"😰Il n'y malheureusement pas de resultats.")
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 else :
-                    bot.send_message(user_id,"Voici les resultats.")
+                    bot.send_message(user_id,"😊Resultats :")
                     bot.send_result(user_id, data["data"])
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 req.setStatus(user_id,"")
