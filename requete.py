@@ -64,7 +64,7 @@ class Requete:
             en passe en paramètre :
                 Le type de paramètre :
                     1 ===> Pour solde
-                    2 ===> Pour les documents
+                    2 ===> Pour les pensions
                 Init : 
                     L'ID de la dernière donnée envoyé afin 
                     de gérer le système de next
@@ -120,6 +120,54 @@ class Requete:
         response["next"]=next
         return response
 
+    def searchListMenu(self, query, init=0):
+        """
+            Recherche la liste des nature,
+
+        """
+        self.__verif()
+        
+
+        template = f"%{query}%"
+        req = '''
+            SELECT n_nature , libelle_nature ,n_typedocument
+            FROM nature
+            WHERE n_nature > %s AND LOWER(nature.libelle_nature) LIKE %s
+            ORDER BY n_nature 
+            LIMIT 10
+        '''
+        self.cursor.execute(req,(init,template))
+        resultat = self.cursor.fetchall()
+        response = {}
+        response["data"] = []
+        for res in resultat :
+            if res[2] == 1:
+                subtitle = "Solde"
+                image = f"{BASE_URL}/icons/solde_photo.jpg"
+            else :
+                subtitle = "Pension"
+                image = f"{BASE_URL}/icons/pension_photo.jpg"
+            title = str(res[1]).replace('\n','')
+            title = str(title).replace('\r','')
+            title = str(title).replace('\t','')
+            response["data"].append({
+                        'title': title,
+                        'subtitle': subtitle,
+                        'image_url': image,
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://www.mouser.fr/",
+                            "webview_height_ratio": "tall",
+                            },
+                        'buttons': [
+                            {
+                                "type": "postback",
+                                "title": "Plus d'info",
+                                "payload": f"_SHOW_INFO_{subtitle.upper()}_{res[0]}"
+                            }
+                        ]
+                    })
+        return response
 
     def getReferenceNature(self,ID):
         self.__verif()
@@ -178,6 +226,3 @@ class Requete:
         return res
     def _close(self):
         self.db.close()
-
-# req = Requete()
-# print(req.getDetailNature(6,2))

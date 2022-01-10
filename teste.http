@@ -1,0 +1,10 @@
+POST  https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAKrMxceBnABAIlbwCLsPIOLky8rdg7nl8PlMyPMsgeUKE1rXnlRZBYcfe6JugBNJ8GF81celnCsRJ0U88EJEnnWXZA0eelWOtzcZAukmdahcgZBRhccXjij9BHNqtp0pSt9knNUWYMZA4wc2kGg0efgOC6e3t2hUZCPaGq2I8ZA3t6YU5ac1ok
+Content-Type: application/json
+
+{
+ "setting-type":"call_to_actions",
+    "thread_state":"new_thread",
+  "get_started":{
+     "payload":"GET_STARTED"
+   }
+}

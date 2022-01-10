@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve bot pjsp  application
+After=network.target
+
+[Service]
+User=root
+Group=dev
+Restart=always
+RestartSec=5
+WorkingDirectory=/opt/PJSP
+ExecStart=/usr/local/bin/gunicorn --workers 3   --bind 127.0.0.1:9000 wsgi
+
+[Install]
+WantedBy=multi-user.target

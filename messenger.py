@@ -85,12 +85,12 @@ class Messenger:
                     "image_url":f"{BASE_URL}/icons/pension.png"
                 },
 
-                # {
-                #     "content_type": "text",
-                #     "title": "Recherche",
-                #     "payload": "_SEARCH",
-                #     "image_url": f"{BASE_URL}/icons/search.png"
-                # },
+                {
+                    "content_type": "text",
+                    "title": "Recherche",
+                    "payload": "_SEARCH",
+                    "image_url": f"{BASE_URL}/icons/search.png"
+                },
 
                 {
                     "content_type": "text",
@@ -140,7 +140,21 @@ class Messenger:
                     "image_url": f"{BASE_URL}/icons/lqd.png"
                 },
             ]
-
+        elif kwargs.get('MENU_SEARCH'):
+            text = "Voulez vous ressayez."
+            ID = kwargs.get('ID')
+            quick_rep = [
+                {
+                    "content_type": "text",
+                    "title": "✅OUI",
+                    "payload": f"_SEARCH_OUI",
+                },
+                {
+                    "content_type": "text",
+                    "title": "❌NON",
+                    "payload": f"_SEARCH_NON",
+                },
+            ]
         elif kwargs.get('MENU_PJSP'):
             text = "Veuillez choisir :"
             ID = kwargs.get('ID')
@@ -189,13 +203,6 @@ class Messenger:
         else:
             return
 
-        if kwargs.get('PRINCIPALE') :
-                quick_rep.append({
-                    "content_type": "text",
-                    "title": "Menu Principale",
-                    "payload": f"_MAIN",
-                    "image_url": f"{BASE_URL}/icons/main.png"
-                })
         data_json = {
             'messaging_type': "RESPONSE",
             'recipient': {
@@ -312,4 +319,28 @@ class Messenger:
             params=params
         )
 
- 
+    def persistent_menu(self, destId):
+        header = {'content-type': 'application/json; charset=utf-8'}
+        params = {"access_token": self.token}
+        dataJSON = {
+            "psid": destId,
+            "persistent_menu": [
+                {
+                    "locale": "default",
+                    "composer_input_disabled": 'false',
+                    "call_to_actions": [
+                        {
+                            "type": "postback",
+                            "title": "Menu principal",
+                            "payload": "_MENU_PRINCIPAL"
+                        },
+                    ]
+                }
+            ]
+        }
+
+        res = requests.post(
+            'https://graph.facebook.com/v12.0/me/custom_user_settings',
+            json=dataJSON, headers=header, params=params
+        )
+        return res

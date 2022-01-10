@@ -15,10 +15,10 @@ class Traitement:
         '''
             Fonction privée qui traite les differentes commandes réçu
         '''
-        
+        bot.persistent_menu(user_id)
         bot.send_action(user_id,'mark_seen')
         
-
+        status = req.getStatus(user_id)
         if commande.startswith('_PAGE_SOLDE_') :
             lastID = int(commande.replace('_PAGE_SOLDE_',''))
             data = req.getListeMenu(1,lastID)
@@ -61,27 +61,37 @@ class Traitement:
 
         elif commande.startswith('_SHOW_INFO_SOLDE_'):
             ID = commande.replace('_SHOW_INFO_SOLDE_','')
-            bot.send_quick_reply(user_id,MENU_SOLDE=True,ID=ID,PRINCIPALE=True)
+            bot.send_quick_reply(user_id,MENU_SOLDE=True,ID=ID)
             return
 
         elif commande.startswith('_SHOW_INFO_PENSION_'):
             ID = commande.replace('_SHOW_INFO_PENSION_','')
-            bot.send_quick_reply(user_id,MENU_PENSION=True,ID=ID,PRINCIPALE=True)
+            bot.send_quick_reply(user_id,MENU_PENSION=True,ID=ID)
             return
 
         elif commande == 'MENU_PJSP':
-            bot.send_quick_reply(user_id,MENU_PJSP=True,PRINCIPALE=True)
+            bot.send_quick_reply(user_id,MENU_PJSP=True)
             return
 
         elif commande == '_MENU_CONTACT':
-            bot.send_quick_reply(user_id,MENU_CONTACT=True,PRINCIPALE=True)
+            bot.send_quick_reply(user_id,MENU_CONTACT=True)
             return
         
         elif commande == '_DOWNLOAD' :
             bot.send_message(user_id, "Attendez un peu , on est en train de le télecharger.")
             bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.apk")
             return
-            
+        elif commande == 'GET_STARTED':
+            bot.persistent_menu(user_id)
+            return
+
+        elif commande == '_SEARCH' or  commande == '_SEARCH_OUI':
+            bot.send_message(user_id, "Veuillez saisir votre mot clé (>3 caractères).")
+            req.setStatus(user_id,"_attente_query")
+            return  
+        elif commande== '_SEARCH_NON':
+            req.setStatus(user_id,"")
+            return          
 
         elif commande.startswith('_SOLDE'):
             commande = commande.replace('_SOLDE','')
@@ -114,17 +124,35 @@ class Traitement:
                 detail = req.getReferenceNature(ID)
                 bot.send_message(user_id,detail)
                 return
-                
             elif commande.startswith('_LQD_'):
                 commande = commande.replace('_LQD_','')
                 ID = int(commande)
                 detail = req.getDetailNature(ID,1)
                 bot.send_message(user_id,detail)
                 return
+        
+        elif status == "_attente_query" :
+            if len(commande)<3:
+                bot.send_quick_reply(user_id,MENU_SEARCH=True)
+                req.setStatus(user_id,"")
+                return
+            else :
+                data = req.searchListMenu(commande)
+                if len(data["data"]) == 0:
+                    bot.send_message(user_id,"Il n'y malheureusement pas de resultats.")
+                    bot.send_quick_reply(user_id,MENU_SEARCH=True)
+                else :
+                    bot.send_message(user_id,"Voici les resultats.")
+                    bot.send_result(user_id, data["data"])
+                    bot.send_quick_reply(user_id,MENU_SEARCH=True)
+                req.setStatus(user_id,"")
+                return
+        elif commande == "_MENU_PRINCIPAL" :
+            req.setStatus(user_id,"")
+            bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
+            return
 
-
-
-        status = req.getStatus(user_id)
+        req.setStatus(user_id,"")
         bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
     
     def _analyse(self, data):
