@@ -1,0 +1,88 @@
+ * Serving Flask app 'server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:8071/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-868-528
+127.0.0.1 - - [17/Dec/2021 07:49:07] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Dec/2021 07:49:12] "POST / HTTP/1.1" 200 -
+Exception in thread Thread-5:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/connection.py", line 743, in reconnect
+    self.connect()
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/abstracts.py", line 717, in connect
+    self._post_connection()
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/abstracts.py", line 692, in _post_connection
+    self.set_charset_collation(self._charset_id)
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/abstracts.py", line 650, in set_charset_collation
+    self._execute_query("SET NAMES '{0}' COLLATE '{1}'".format(
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/connection.py", line 870, in _execute_query
+    self.handle_unread_result()
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/connection.py", line 1059, in handle_unread_result
+    raise errors.InternalError("Unread result found")
+mysql.connector.errors.InternalError: Unread result found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/PJSP/core.py", line 142, in _analyse
+    req.verifUtilisateur(sender_id) 
+  File "/opt/PJSP/requete.py", line 24, in verifUtilisateur
+    self.__verif()
+  File "/opt/PJSP/requete.py", line 19, in __verif
+    self.db.reconnect()
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/connection.py", line 750, in reconnect
+    raise errors.InterfaceError(msg)
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): Unread result found
+ * Detected change in '/opt/PJSP/requete.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-868-528
+ * Detected change in '/opt/PJSP/requete.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "/opt/PJSP/server.py", line 1, in <module>
+    import core
+  File "/opt/PJSP/core.py", line 2, in <module>
+    import requete
+  File "/opt/PJSP/requete.py", line 20
+    pass
+       ^
+TabError: inconsistent use of tabs and spaces in indentation
+ * Serving Flask app 'server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:8071/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-868-528
+127.0.0.1 - - [17/Dec/2021 07:51:17] "POST / HTTP/1.1" 200 -
+Exception in thread Thread-5:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/PJSP/core.py", line 142, in _analyse
+    req.verifUtilisateur(sender_id) 
+  File "/opt/PJSP/requete.py", line 28, in verifUtilisateur
+    self.cursor.execute(req, (userID,))
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/cursor.py", line 521, in execute
+    self._connection.handle_unread_result()
+  File "/usr/local/lib/python3.8/dist-packages/mysql/connector/connection.py", line 1059, in handle_unread_result
+    raise errors.InternalError("Unread result found")
+mysql.connector.errors.InternalError: Unread result found
+127.0.0.1 - - [17/Dec/2021 07:51:22] "POST / HTTP/1.1" 200 -
+ * Detected change in '/opt/PJSP/conf.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-868-528

@@ -1,0 +1,22 @@
+from os import environ as env
+
+from dotenv import load_dotenv
+
+VERIFY_TOKEN='PJSP'
+ACCESS_TOKEN='EAAKrMxceBnABAFNgckFcnvzstav85gwXSZCVxoaxgrQEn0anUkFuFry0HIZAVsuWZBWiBaOrUIezfjZAYOziHEuZBj66butLXpcikVB1ZBkRnas9e2nv8QTOoXfHaPIpMEQpGdmyG5yKzmZAeUocKk4rTR1ibKpr5ET77BLaXkTp4PxZAU4Cuz6m'
+load_dotenv()
+BASE_URL = 'https://pjsp.iteam-s.mg'
+
+DATABASE = {
+
+          'host' : "127.0.0.1",
+
+          'user' : env.get('ITEAMS_DB_USER'),
+
+          'password': env.get('ITEAMS_DB_PASSWORD'),
+
+          'database': 'pjsp',
+
+	     'charset': 'utf8mb4'
+
+     }

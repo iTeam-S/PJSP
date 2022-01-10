@@ -11,12 +11,11 @@ class Requete:
 
     def __connect(self):
         self.db = mysql.connector.connect(**DATABASE)
-        self.cursor = self.db.cursor()
+        self.cursor = self.db.cursor(buffered=True)
     
 
     def __verif(self):
-        if not self.db.is_connected():
-            self.db.reconnect()
+       pass
 
 
 
