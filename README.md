@@ -1,2 +1,3 @@
 # PJSP
-Un bot Messenger  d'information sur les soldes et le les pensions.
+
+Un bot messenger pour informer les gens sur leurs pensions et leurs soldes

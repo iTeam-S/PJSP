@@ -70,7 +70,7 @@ class Messenger:
                 #     "image_url": f"{BASE_URL}/icons/search.png"
                 # },
         if kwargs.get('MENU_PRINCIPALE'):
-            text = "Bienvenue sur PJSP"
+            text = "Bienvenue sur PJSP😊😊😊"
             quick_rep = [
                 {
                     "content_type": "text",
@@ -141,7 +141,7 @@ class Messenger:
                 },
             ]
         elif kwargs.get('MENU_SEARCH'):
-            text = "Voulez-vous ressayez?"
+            text = "Voulez-vous reessayer?"
             ID = kwargs.get('ID')
             quick_rep = [
                 {

@@ -140,10 +140,10 @@ class Traitement:
             else :
                 data = req.searchListMenu(commande)
                 if len(data["data"]) == 0:
-                    bot.send_message(user_id,"😰Il n'y malheureusement pas de resultats.")
+                    bot.send_message(user_id,"😰Il n'y a malheureusement pas de resultats pour ce mot clé.")
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 else :
-                    bot.send_message(user_id,"😊Resultats :")
+                    bot.send_message(user_id,"😊Les resultats :")
                     bot.send_result(user_id, data["data"])
                     bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 req.setStatus(user_id,"")
