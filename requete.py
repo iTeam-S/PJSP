@@ -203,8 +203,8 @@ class Requete:
         """
         self.cursor.execute(req,(ID,type))
         output= self.cursor.fetchall()   
+        
         res = ""
-
         current_titre = ""
         current_sous_titre = ""
 
