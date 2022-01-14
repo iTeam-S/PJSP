@@ -3,5 +3,4 @@ conf.py
 nohup.out
 pjsp.service
 conf.py.save
-rest.http
 __pycache__/

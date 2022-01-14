@@ -8,7 +8,7 @@ Group=dev
 Restart=always
 RestartSec=5
 WorkingDirectory=/opt/PJSP
-ExecStart=/usr/local/bin/gunicorn --workers 3   --bind 127.0.0.1:9000 wsgi
+ExecStart=/usr/local/bin/gunicorn --workers 3   --bind 127.0.0.1:8071 wsgi
 
 [Install]
 WantedBy=multi-user.target
