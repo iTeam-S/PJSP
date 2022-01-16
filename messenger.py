@@ -70,26 +70,23 @@ class Messenger:
                 #     "image_url": f"{BASE_URL}/icons/search.png"
                 # },
         if kwargs.get('MENU_PRINCIPALE'):
-            text = "Bienvenue sur PJSP😊😊😊"
+            text = "Bienvenue sur PJSP😊"
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Soldes",
+                    "title": "💱Soldes",
                     "payload": "_PAGE_SOLDE_0",
-                    "image_url": f"{BASE_URL}/icons/solde.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Pensions",
-                    "payload": "_PAGE_PENSION_0",
-                    "image_url":f"{BASE_URL}/icons/pension.png"
+                    "title": "🧓Pensions",
+                    "payload": "_PAGE_PENSION_0",   
                 },
 
                 {
                     "content_type": "text",
-                    "title": "Recherche",
+                    "title": "🔎Recherche",
                     "payload": "_SEARCH",
-                    "image_url": f"{BASE_URL}/icons/search.png"
                 },
 
                 {
@@ -100,48 +97,43 @@ class Messenger:
                 },
             ] 
         elif kwargs.get('MENU_SOLDE'):
-            text = "Veuillez choisir :"
+            text = "Veuillez choisir😊:"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Réference",
+                    "title": "📄Réference",
                     "payload": f"_SOLDE_REF_{ID}",
-                    "image_url": f"{BASE_URL}/icons/ref.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Visa",
+                    "title": "💳Visa",
                     "payload": f"_SOLDE_VISA_{ID}",
-                    "image_url": f"{BASE_URL}/icons/visa.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Mandatement",
+                    "title": "🗞️Mandatement",
                     "payload": f"_SOLDE_MDT_{ID}",
-                    "image_url": f"{BASE_URL}/icons/mdt.png"
                 },
             ]
 
         elif kwargs.get('MENU_PENSION'):
-            text = "Veuillez-choisir :"
+            text = "Veuillez-choisir😊:"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Réference",
+                    "title": "📄Réference",
                     "payload": f"_PENSION_REF_{ID}",
-                    "image_url": f"{BASE_URL}/icons/ref.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Liquidation",
+                    "title": "💵Liquidation",
                     "payload": f"_PENSION_LQD_{ID}",
-                    "image_url": f"{BASE_URL}/icons/lqd.png"
                 },
             ]
         elif kwargs.get('MENU_SEARCH'):
-            text = "Voulez-vous reessayer?"
+            text = "Voulez-vous reessayer?😊"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
@@ -156,48 +148,37 @@ class Messenger:
                 },
             ]
         elif kwargs.get('MENU_PJSP'):
-            text = "Veuillez choisir :"
+            text = "Veuillez-choisir😊:"
             ID = kwargs.get('ID')
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Contact",
+                    "title": "🗺️Contact",
                     "payload": "_MENU_CONTACT",
-                    "image_url": f"{BASE_URL}/icons/contact.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Doléance",
-                    "payload": f"_DOLEANCE",
-                    "image_url": f"{BASE_URL}/icons/doleance.png"
-                },
-                {
-                    "content_type": "text",
-                    "title": "Télecharger",
+                    "title": "🛒Télecharger",
                     "payload": f"_DOWNLOAD",
-                    "image_url": f"{BASE_URL}/icons/download.png"
                 },
             ]
         elif kwargs.get('MENU_CONTACT'):
-            text = "Veuillez choisir :"
+            text = "Veuillez-choisir😊:"
             quick_rep = [
                 {
                     "content_type": "text",
-                    "title": "Service regional",
+                    "title": "🗺️Service regional",
                     "payload": f"_PAGE_CONTACT_SERVICE_0",
-                    "image_url": f"{BASE_URL}/icons/contact.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Antenne",
+                    "title": "🗺️Antenne",
                     "payload": f"_PAGE_CONTACT_ANTENNE_0",
-                    "image_url": f"{BASE_URL}/icons/doleance.png"
                 },
                 {
                     "content_type": "text",
-                    "title": "Service centrale",
+                    "title": "🗺️Service centrale",
                     "payload": f"_PAGE_CONTACT_CENTRAL_0",
-                    "image_url": f"{BASE_URL}/icons/download.png"
                 },
             ]
         else:

@@ -66,8 +66,9 @@ class Requete:
         self.cursor.execute(req,(type,))
         return self.cursor.fetchone()[0]
 
+    @verif_db
     def getLastTypeService (self , type):
-        self.__verif()
+        
         req = """
             SELECT MAX(n_service)
             FROM service
@@ -90,10 +91,10 @@ class Requete:
         
         if type == 1:
             subtitle = "Solde"
-            image = f"{BASE_URL}/icons/solde_photo.jpg"
+            image = f"{BASE_URL}/icons/solde_photo.png"
         else :
             subtitle = "Pension"
-            image = f"{BASE_URL}/icons/pension_photo.jpg"
+            image = f"{BASE_URL}/icons/pension_photo.jpeg"
         req = '''
             SELECT n_nature , libelle_nature
             FROM nature
@@ -123,7 +124,7 @@ class Requete:
                         'buttons': [
                             {
                                 "type": "postback",
-                                "title": "Plus d'info",
+                                "title": "➕Plus d'info",
                                 "payload": f"_SHOW_INFO_{subtitle.upper()}_{res[0]}"
                             }
                         ]
@@ -178,7 +179,7 @@ class Requete:
                         'buttons': [
                             {
                                 "type": "postback",
-                                "title": "Plus d'info",
+                                "title": "➕Plus d'info",
                                 "payload": f"_SHOW_INFO_{subtitle.upper()}_{res[0]}"
                             }
                         ]
@@ -194,9 +195,12 @@ class Requete:
         """
         self.cursor.execute(req,(ID,))
         data = self.cursor.fetchall()
-        res = "Réference :"
-        for a in data :
-            res = res + f"\n -{a[1]} "
+        if len(data)==0 :
+            res = "Ooh😓 ,Il n'y pas de réference pour cette article."
+        else :
+            res = "Réference :"
+            for a in data :
+                res = res + f"\n -{a[1]} "
         return res
 
     @verif_db
@@ -238,18 +242,17 @@ class Requete:
             piece = str(piece).replace("\r","")
             res += f"-{piece}\n"                         
         if res == "" :
-            return "Il n'y a pas assez information."
+            return "Ooh😓,Il n'y a pas assez information."
         return res
 
     def _close(self):
         self.db.close()
-
+    @verif_db
     def getContact(self, type, init=0):
         """
             Pour récuperer la lsite de leur contacts
         """
-        self.__verif()
-        image = f"{BASE_URL}/icons/solde_photo.jpg"
+        image = f"{BASE_URL}/icons/contact_photo.png"
         req = '''
             SELECT n_service ,nom_service , telephone
             FROM service
@@ -266,6 +269,8 @@ class Requete:
             title = str(res[1]).replace('\n','')
             title = str(title).replace('\r','')
             title = str(title).replace('\t','')
+            phone = str(res[2]).replace(' ',"")
+            phone = f"+261{phone}"
             response["data"].append({
                         'title': title,
                         'subtitle': res[2],
@@ -278,8 +283,8 @@ class Requete:
                         'buttons': [
                             {
                                 "type": "phone_number",
-                                "title": "Appeler",
-                                "payload": res[2],
+                                "title": "☎️Appeler",
+                                "payload": phone,
                             }
                         ]
                     })

@@ -15,12 +15,14 @@ class Traitement:
         '''
             Fonction privée qui traite les differentes messages réçu dans la page.
         '''
-        print(commande)
         bot.persistent_menu(user_id)
         bot.send_action(user_id,'mark_seen')
         
         status = req.getStatus(user_id)
-        if commande.startswith('_PAGE_SOLDE_') :
+        if commande == '_GET_STARTED':
+            bot.send_quick_reply(user_id,MENU_PRINCIPALE    =True)
+            return
+        elif commande.startswith('_PAGE_SOLDE_') :
             lastID = int(commande.replace('_PAGE_SOLDE_',''))
             data = req.getListeMenu(1,lastID)
             if data["next"] == True :
@@ -28,9 +30,8 @@ class Traitement:
                 next = [
                         {
                             "content_type": "text",
-                            "title":"Next",
+                            "title":"⏭️Next",
                             "payload": f"_PAGE_SOLDE_{lastID}",
-                            "image_url":f"{BASE_URL}/icons/next.png"
                         }
                     ]
                 bot.send_result(user_id, data["data"],next= next)
@@ -52,7 +53,6 @@ class Traitement:
                 type = 2
             elif commande.startswith('CENTRAL_') :
                 commande = str(commande).replace('CENTRAL_','')
-                print("GG")
                 start = int(commande)
                 nom_type = 'CENTRAL'
                 type = 3
@@ -62,15 +62,13 @@ class Traitement:
                 next = [
                         {
                             "content_type": "text",
-                            "title":"Next",
+                            "title":"⏭️Next",
                             "payload": f"_PAGE_CONTACT_{nom_type}_{lastID}",
-                            "image_url":f"{BASE_URL}/icons/next.png"
                         }
                     ]
                 bot.send_result(user_id, data["data"],next= next)
-            elif  data["next"] == False:
-                x = bot.send_result(user_id, data["data"])
-                print(x)
+            else:
+                bot.send_result(user_id, data["data"])
             return
         elif commande == '_MAIN' :
             bot.send_quick_reply(user_id, MENU_PRINCIPALE=True)
@@ -84,9 +82,8 @@ class Traitement:
                 next = [
                         {
                             "content_type": "text",
-                            "title":"Next",
+                            "title":"⏭️Next",
                             "payload": f"_PAGE_PENSION_{lastID}",
-                            "image_url":f"{BASE_URL}/icons/next.png"
                         }
                     ]
                 bot.send_result(user_id, data["data"],next= next)
