@@ -14,13 +14,23 @@ class Requete:
         self.cursor = self.db.cursor(buffered=True)
     
 
-    def __verif(self):
-       pass
+    def verif_db(fonction):
+        '''
+            Un decorateur de verification de la
+            connexion au serveur avant traitement.
+        '''
+        def trt_verif(*arg, **kwarg):
+            if not arg[0].db.is_connected():
+                # reconnexion de la base
+                try:
+                    arg[0].db.reconnect()
+                except Exception:
+                    arg[0].__connect()
+            return fonction(*arg, **kwarg)
+        return trt_verif
 
-
-
+    @verif_db
     def verifUtilisateur(self, userID):
-        self.__verif()
         req = '''
 		    INSERT IGNORE INTO Utilisateur 
 		    (id) VALUES (%s)
@@ -28,9 +38,8 @@ class Requete:
         self.cursor.execute(req, (userID,))
         self.db.commit()
 
-
+    @verif_db
     def getStatus(self, userID):
-        self.__verif()
         req = '''
 		    SELECT status FROM Utilisateur WHERE id = %s
 		'''
@@ -38,8 +47,8 @@ class Requete:
 
         return self.cursor.fetchone()[0]
 
+    @verif_db
     def setStatus(self, userID, action):
-        self.__verif()
         req = '''
 			UPDATE Utilisateur set status = %s
 			WHERE id = %s
@@ -47,9 +56,8 @@ class Requete:
         self.cursor.execute(req, (action, userID))
         self.db.commit()
 
-
+    @verif_db
     def getLastTypeDocument (self , type):
-        self.__verif()
         req = """
             SELECT MAX(n_nature)
             FROM nature
@@ -67,6 +75,7 @@ class Requete:
         """
         self.cursor.execute(req,(type,))
         return self.cursor.fetchone()[0]
+    @verif_db
     def getListeMenu(self, type, init=0):
         """
             Récuperer la liste des nature,
@@ -78,7 +87,6 @@ class Requete:
                     L'ID de la dernière donnée envoyé afin 
                     de gérer le système de next
         """
-        self.__verif()
         
         if type == 1:
             subtitle = "Solde"
@@ -129,13 +137,12 @@ class Requete:
         response["next"]=next
         return response
 
+    @verif_db
     def searchListMenu(self, query, init=0):
         """
             Recherche la liste des nature,
 
         """
-        self.__verif()
-        
 
         template = f"%{query}%"
         req = '''
@@ -178,8 +185,8 @@ class Requete:
                     })
         return response
 
+    @verif_db
     def getReferenceNature(self,ID):
-        self.__verif()
         req = """
             SELECT n_article, text_article 
             FROM article 
@@ -192,13 +199,13 @@ class Requete:
             res = res + f"\n -{a[1]} "
         return res
 
+    @verif_db
     def getDetailNature(self,ID,type=1):
         """
             Type =
                 1 -> Visa
                 2 -> Mandatement
         """
-        self.__verif()
         req = """
             SELECT T.titre , S.sous_titre , P.piece 
             FROM piece P 
@@ -233,6 +240,7 @@ class Requete:
         if res == "" :
             return "Il n'y a pas assez information."
         return res
+
     def _close(self):
         self.db.close()
 
