@@ -15,6 +15,7 @@ class Traitement:
         '''
             Fonction privée qui traite les differentes messages réçu dans la page.
         '''
+        print(commande)
         bot.persistent_menu(user_id)
         bot.send_action(user_id,'mark_seen')
         
@@ -37,6 +38,40 @@ class Traitement:
                 bot.send_result(user_id, data["data"])
             return
 
+        elif commande.startswith('_PAGE_CONTACT_'):
+            commande = str(commande).replace('_PAGE_CONTACT_','')
+            if commande.startswith('SERVICE_') :
+                commande = str(commande).replace('SERVICE_','')
+                start = int(commande)
+                nom_type = 'SERVICE'
+                type = 1
+            elif commande.startswith('ANTENNE_') :
+                commande = str(commande).replace('ANTENNE_','')
+                start = int(commande)
+                nom_type = 'ANTENNE'
+                type = 2
+            elif commande.startswith('CENTRAL_') :
+                commande = str(commande).replace('CENTRAL_','')
+                print("GG")
+                start = int(commande)
+                nom_type = 'CENTRAL'
+                type = 3
+            data = req.getContact(type,start)
+            if data["next"] == True :
+                lastID = data["lastID"]
+                next = [
+                        {
+                            "content_type": "text",
+                            "title":"Next",
+                            "payload": f"_PAGE_CONTACT_{nom_type}_{lastID}",
+                            "image_url":f"{BASE_URL}/icons/next.png"
+                        }
+                    ]
+                bot.send_result(user_id, data["data"],next= next)
+            elif  data["next"] == False:
+                x = bot.send_result(user_id, data["data"])
+                print(x)
+            return
         elif commande == '_MAIN' :
             bot.send_quick_reply(user_id, MENU_PRINCIPALE=True)
             return 
@@ -133,7 +168,7 @@ class Traitement:
                 return
         
         elif status == "_attente_query" :
-            if len(commande)<3:
+            if len(commande)<4:
                 bot.send_quick_reply(user_id,MENU_SEARCH=True)
                 req.setStatus(user_id,"")
                 return

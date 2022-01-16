@@ -58,6 +58,15 @@ class Requete:
         self.cursor.execute(req,(type,))
         return self.cursor.fetchone()[0]
 
+    def getLastTypeService (self , type):
+        self.__verif()
+        req = """
+            SELECT MAX(n_service)
+            FROM service
+            WHERE type = %s 
+        """
+        self.cursor.execute(req,(type,))
+        return self.cursor.fetchone()[0]
     def getListeMenu(self, type, init=0):
         """
             Récuperer la liste des nature,
@@ -226,3 +235,50 @@ class Requete:
         return res
     def _close(self):
         self.db.close()
+
+    def getContact(self, type, init=0):
+        """
+            Pour récuperer la lsite de leur contacts
+        """
+        self.__verif()
+        image = f"{BASE_URL}/icons/solde_photo.jpg"
+        req = '''
+            SELECT n_service ,nom_service , telephone
+            FROM service
+            WHERE type = %s AND n_service > %s
+            ORDER BY n_service 
+            LIMIT 10
+        '''
+        self.cursor.execute(req,(type,init))
+        resultat = self.cursor.fetchall()
+        lastID = 0
+        response = {}
+        response["data"] = []
+        for res in resultat :
+            title = str(res[1]).replace('\n','')
+            title = str(title).replace('\r','')
+            title = str(title).replace('\t','')
+            response["data"].append({
+                        'title': title,
+                        'subtitle': res[2],
+                        'image_url': image,
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://www.pjsp.fr/",
+                            "webview_height_ratio": "tall",
+                            },
+                        'buttons': [
+                            {
+                                "type": "phone_number",
+                                "title": "Appeler",
+                                "payload": res[2],
+                            }
+                        ]
+                    })
+            lastID = res[0]                  
+        response["lastID"] = int(lastID)
+        len = int(self.getLastTypeService(type))
+        if lastID < len : next = True 
+        else :next = False
+        response["next"]=next
+        return response

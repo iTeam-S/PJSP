@@ -196,7 +196,7 @@ class Messenger:
                 {
                     "content_type": "text",
                     "title": "Service centrale",
-                    "payload": f"_DOWNLOAD",
+                    "payload": f"_PAGE_CONTACT_CENTRAL_0",
                     "image_url": f"{BASE_URL}/icons/download.png"
                 },
             ]
