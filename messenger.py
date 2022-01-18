@@ -315,6 +315,16 @@ class Messenger:
                             "title": "🏠Menu principal",
                             "payload": "_MENU_PRINCIPAL"
                         },
+                                                {
+                            "type": "postback",
+                            "title": "💱Soldes",
+                            "payload": "_PAGE_SOLDE_0",
+                        },
+                                                {
+                            "type": "postback",
+                            "title": "🧓Pensions",
+                            "payload": "_PAGE_PENSION_0",  
+                        },
                     ]
                 }
             ]

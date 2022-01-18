@@ -114,7 +114,6 @@ class Traitement:
             bot.send_file_url(user_id, f"{BASE_URL}/icons/pjsp.apk")
             return
         elif commande == 'GET_STARTED':
-            bot.persistent_menu(user_id)
             bot.send_quick_reply(user_id,MENU_PRINCIPALE=True)
             return
 
